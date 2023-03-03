@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
+import mongoose from "mongoose";
+import bcrypt from "bcryptjs";
 
 const userSchema = mongoose.Schema(
   {
@@ -8,7 +8,6 @@ const userSchema = mongoose.Schema(
     password: { type: "String", required: true },
     pic: {
       type: "String",
-      required: true,
       default:
         "https://www.kasandbox.org/programming-images/avatars/cs-hopper-cool.png",
     },
@@ -20,6 +19,21 @@ const userSchema = mongoose.Schema(
   },
   { timestaps: true }
 );
+
+userSchema.methods.matchPassword = async function (enteredPassword) {
+
+  return true;
+};
+
+userSchema.pre("save", async function (next) {
+  if (!this.isModified) {
+    next();
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
+
 
 const User = mongoose.model("User", userSchema);
 export default User;

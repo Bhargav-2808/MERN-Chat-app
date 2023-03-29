@@ -13,6 +13,11 @@ const app = express();
 let port = process.env.PORT || 5000;
 
 app.use(cors());
+// app.use((req, res, next) =>{
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
 app.use(express.json());
 db;
 
@@ -28,15 +33,15 @@ const httpServer = app.listen(port, () => {
 const io = new Server(httpServer, {
   pingTimeout: 60000,
   cors: {
-    origin: "http://localhost:3000",
-    // credentials: true,
+    origin: "*",
+    credentials: true,
   },
 });
 
 // app.get("videocaall/:room", (req, res) => {
 //   res.render("home",{layout:'index',roomID:req.params.room});
 // });
-
+// localhost
 // io.on("connection", (socket) => {
 //   socket.on("join-room", (roomId, userId) => {
 //       socket.join(roomId);
@@ -52,7 +57,11 @@ io.on("connection", (socket) => {
   socket.on("setup", (userData) => {
     socket.join(userData._id);
     socket.emit("connected");
-  });
+  },
+
+  
+  
+  );
 
   socket.on("join chat", (room) => {
     socket.join(room);
@@ -82,8 +91,7 @@ io.on("connection", (socket) => {
 
   socket.on("join-room", (data) => {
     const { roomId, emailId } = data;
-    console.log(emailId ,roomId);
-
+    console.log(emailId, roomId);
 
     emailToSocketMapping.set(emailId, socket.id);
     socketToEmailMapping.set(socket.id, emailId);
@@ -104,10 +112,10 @@ io.on("connection", (socket) => {
     });
   });
 
-  socket.on('call-accepted',(data)=>{
-    const {emailId,ans} = data;
+  socket.on("call-accepted", (data) => {
+    const { emailId, ans } = data;
     const socketId = emailToSocketMapping.get(emailId);
 
-    socket.to(socketId).emit("call-accepted",{ans});
-  })
+    socket.to(socketId).emit("call-accepted", { ans });
+  });
 });

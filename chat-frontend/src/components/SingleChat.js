@@ -51,6 +51,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       const config = {
         headers: {
           Authorization: `Bearer ${user.token}`,
+          "Access-Control-Allow-Origin":"*"
         },
       };
 
@@ -85,6 +86,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           headers: {
             "Content-type": "application/json",
             Authorization: `Bearer ${user.token}`,
+            "Access-Control-Allow-Origin":"*"
           },
         };
         setNewMessage("");
@@ -119,6 +121,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           headers: {
             "Content-type": "application/json",
             Authorization: `Bearer ${user.token}`,
+            "Access-Control-Allow-Origin":"*"
           },
         };
         setNewMessage("");

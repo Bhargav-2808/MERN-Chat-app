@@ -74,6 +74,7 @@ function SideDrawer() {
       const config = {
         headers: {
           Authorization: `Bearer ${user.token}`,
+          "Access-Control-Allow-Origin":"*"
         },
       };
 
@@ -102,6 +103,7 @@ function SideDrawer() {
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${user.token}`,
+          "Access-Control-Allow-Origin":"*"
         },
       };
       const { data } = await axios.post(`http://localhost:5000/chat`, { userId }, config);

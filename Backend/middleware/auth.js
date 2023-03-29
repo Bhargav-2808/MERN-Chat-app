@@ -7,6 +7,7 @@ import jwt from 'jsonwebtoken';
 const protect = async (req, res, next) => {
   let token;
 
+  console.log(process.env.JWT_SECRET)
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")

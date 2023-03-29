@@ -44,6 +44,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
       const config = {
         headers: {
           Authorization: `Bearer ${user.token}`,
+          "Access-Control-Allow-Origin":"*"
         },
       };
       const { data } = await axios.get(`http://localhost:5000/user?search=${search}`, config);
@@ -129,6 +130,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
       const config = {
         headers: {
           Authorization: `Bearer ${user.token}`,
+          "Access-Control-Allow-Origin":"*"
         },
       };
       const { data } = await axios.put(
@@ -174,6 +176,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
       const config = {
         headers: {
           Authorization: `Bearer ${user.token}`,
+          "Access-Control-Allow-Origin":"*"
         },
       };
       const { data } = await axios.put(

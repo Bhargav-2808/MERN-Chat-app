@@ -57,6 +57,7 @@ const GroupChatModal = ({ children }) => {
       const config = {
         headers: {
           Authorization: `Bearer ${user.token}`,
+          "Access-Control-Allow-Origin":"*"
         },
       };
       const { data } = await axios.get(`http://localhost:5000/user?search=${search}`, config);
@@ -86,6 +87,7 @@ const GroupChatModal = ({ children }) => {
       const config = {
         headers: {
           Authorization: `Bearer ${user.token}`,
+          "Access-Control-Allow-Origin":"*"
         },
       };
       
@@ -125,6 +127,7 @@ const GroupChatModal = ({ children }) => {
       const config = {
         headers: {
           Authorization: `Bearer ${user.token}`,
+          "Access-Control-Allow-Origin":"*"
         },
       };
       const { data } = await axios.post(
